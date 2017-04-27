@@ -1,0 +1,14 @@
+var mongoose = require('mongoose');
+	fs = require('fs');
+	path = require('path');
+	models_path = path.join(__dirname, './../models');
+mongoose.createConnection('mongodb://localhost/LunchTimeDatabase');
+mongoose.connect('mongodb://localhost/LunchTimeDatabase');
+
+reg = new RegExp( ".js$", "i" ),
+
+fs.readdirSync( models_path ).forEach( function( file ) {
+  if( reg.test( file ) ) {
+    require( path.join( models_path, file ) );
+  }
+});

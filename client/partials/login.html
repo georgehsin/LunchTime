@@ -1,0 +1,33 @@
+<div class="container">
+<div class="section">
+<div class="row">
+<div class="col s12 m6 offset-m6">
+	<form novalidate>
+	<!-- Login -->
+		<div ng-hide="signup">
+			<input type="text" ng-model="login.email" placeholder="Email">
+       		<input type="password" ng-model="login.password" placeholder="Password">
+        		<p ng-show="invalid">Incorrect Email/Password Combination</p>
+        	<!-- <input type="submit" value="Login"> -->
+        	<button ng-click="loginForm()">Login</button>
+        </div>
+	<!-- /Login -->
+	<!-- Register -->
+		<div ng-show="signup">
+	        <input ng-hide="User" type="text" ng-model="register.name" placeholder="Name" required>
+	        	<p ng-show="name">You name is required.</p>
+	        <input ng-hide="User" type="email" ng-model="register.email" placeholder="Email" required>
+	        	<p ng-show="email">Please enter a valid email.</p>
+	        <input ng-hide="User" type="password" ng-model="register.password" placeholder="Password" required>
+	        	<p ng-show="password">Password must be a minimum of 8 characters and include at least one number</p>
+	        <input ng-hide="User" type="password" ng-model="register.confirm" placeholder="Confirm Password" required>
+	        	<p ng-show="confirm">Passwords do not match.</p>
+	        	<p ng-show="empty">Please fill out the entire registration form.</p>
+	        	<button ng-click="submit()">Register</button>
+	    </div>
+    <!-- /Register -->
+	</form>
+</div>
+</div>
+</div>
+</div>

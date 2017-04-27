@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>LunchTime!</title>
+  <link type="text/css" rel="stylesheet" href="../materialize/dist/css/materialize.min.css"/>
+  <link type="text/css" rel="stylesheet" href="static/css/styles.css"/>
+</head>
+
+<body ng-app="myApp" ng-controller="indexController">
+  <div class="navbar-fixed">  
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container">
+        <ul class="right hide-on-med-and-down">
+          <li><a class="light-blue-text text-darken-3" href="#!/">Home</a></li>
+          <li ng-hide='user'><a class="light-blue-text text-darken-3" href="#!/login">Login</a></li>
+          <li ng-hide='user'><a class="light-blue-text text-darken-3" href="#!/signup">Register</a></li>
+          <li ng-show='user'><a class="light-blue-text text-darken-3" href="#!/profile/{{userId}}">Profile</a></li>
+          <li ng-show='user'><a class="light-blue-text text-darken-3" ng-click='logout()'>Logout</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+          <li><a class="light-blue-text text-darken-3" href="#!/">Home</a></li>
+
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+  </div>
+
+<!-- PARTIALS -->
+  <div ng-view>
+  
+  </div>   
+<!-- PARTIALS -->
+
+
+  <footer class="page-footer orange darken-1">
+    <div class="container">
+      <div class="row">
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+<!--       Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+      </div> -->
+    </div>
+  </footer>
+  <a name="contactinformation"></a>
+
+<!--Scripts-->
+  <script src='../jquery/dist/jquery.js'></script>
+  <script src='../angular/angular.js'></script>
+  <script src='../angular-route/angular-route.js'></script>
+  <script src='../angular-materialize/src/angular-materialize.js'></script>
+  <script src="../materialize/dist/js/materialize.js"></script>
+  <script src="../angular-cookies/angular-cookies.js"></script>
+  <script src="static/js/validate.js"></script>
+  
+  <script src='app.js'></script>
+  <script src='controllers/indexController.js'></script>
+  <script src='controllers/homeController.js'></script>
+  <script src='controllers/eventController.js'></script>
+  <script src='controllers/loginController.js'></script>
+  <script src='controllers/signupController.js'></script>
+  <script src='factories/usersFactory.js'></script>
+
+</body>
+</html>
+
+
