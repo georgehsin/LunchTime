@@ -24,6 +24,7 @@ myApp.controller('signupController', function($route, $scope, usersFactory, $loc
     		usersFactory.create($scope.register, function(){
                 $cookies.put('user', $scope.register.name);
                 $cookies.put('userId', $scope.register._id);
+                console.log()
                 $scope.register = {};
             });
             window.location.href = '/';

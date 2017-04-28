@@ -1,7 +1,6 @@
 myApp.controller('loginController', function($route, $scope, usersFactory, $location, $cookies) {
 
     $scope.loginForm = function(){
-    	console.log($scope.login)
     	usersFactory.login($scope.login, function(data){
             if(data.invalid){
                 $scope.invalid = true;

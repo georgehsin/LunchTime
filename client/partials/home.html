@@ -2,8 +2,19 @@
 	<div class="section">
 		<div class="row">
 			<div class="col s12 m6 offset-m3">
-				<h4 class="inline">Create New LunchTime <a href="#!/event"><button class="inline">+</button></a></h4>
-				
+				<h4 class="inline" ng-switch='user'>Create New LunchTime 
+					<a ng-if='user' href="#!/event"><button class="inline">+</button></a>
+					<a ng-switch-when='undefined' href="#!/login"><button class="inline">+</button></a>
+				</h4>
+				<form ng-submit=search()>
+					<input type="text" ng-model="result.name" placeholder="Search by name or email">
+					<input type="submit" name="submit">
+				</form>
+				<ul ng-repeat='user in searchResults'>
+					<li ng-hide='user._id == userId'>
+						{{user.name}} <button ng-hide='friends[user._id] == true || sentRequest[user._id] == true || recievedRequest[user._id] == true' ng-click='sendFriendRequest(userId, user._id)'>Add Friend</button>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>

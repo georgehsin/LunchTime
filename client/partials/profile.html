@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="section">
+		<div class="row">
+			<div class="col s12 m6 offset-m3">
+				<ul>
+					<li>ID:{{self._id}}</li>
+					<li>Name:{{self.name}}</li>
+					<li>Email:{{self.email}}</li>
+					<li>Friends:</li>
+					<ol>
+						<li ng-repeat='friend in self.friends'>{{friend.name}}</li>
+					</ol>
+					<li>New Friend Requests:</li>
+					<ol>
+						<li ng-repeat='new in self.rec_pending'>{{new.name}} <button ng-click='add(new._id, self._id)'>Accept</button></li>
+					</ol>
+					<li>Friend Requests Sent:</li>
+					<ol>
+						<li ng-repeat='request in self.sent_pending'>{{request.name}}</li>
+					</ol>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</div>

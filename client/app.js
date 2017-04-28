@@ -20,7 +20,7 @@ myApp.config(function ($routeProvider) {
     })
     .when('/profile/:id',{
         templateUrl: 'partials/profile.html',
-        controller: 'signupController'
+        controller: 'profileController'
     })
     .otherwise({
       redirectTo: '/'
