@@ -5,3 +5,29 @@
 .top {
 	vertical-align: top;
 }
+
+.mapContainer{
+	height: 600px;
+	width: 600px;
+}
+
+.map{
+	height: 100%;
+}
+
+.yelpBox{
+	text-align: center;
+	/*background-color: #e19d35;*/
+}
+
+.yelpImgBox{
+	height: 300px;
+	width: 400px;
+	/*background-color: #e19d35;*/
+}
+
+.yelpImg{
+	min-height: 300px;
+	max-height: 300px;
+	max-width: 400px;
+}

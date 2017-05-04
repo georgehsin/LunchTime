@@ -1,20 +1,9 @@
 myApp.factory('friendsFactory', ['$http', function($http) {
 	
   function friendsFactory(){
-    this.profile = function(id, callback){
-      console.log(id)
-      $http.get('/user/'+id).then(function(returned_data){
+    this.add = function(addInfo, callback){
+      $http.put('/user', addInfo).then(function(returned_data){
         if(typeof(callback)=='function'){
-          console.log(returned_data.data)
-          user = returned_data.data;
-          callback(user);
-        }
-      });
-    }
-    this.index = function(search, callback){
-      $http.post('/userSearch', search).then(function(returned_data){
-        if(typeof(callback)=='function'){
-          console.log(returned_data.data)
           user = returned_data.data;
           callback(user);
         }
@@ -22,30 +11,29 @@ myApp.factory('friendsFactory', ['$http', function($http) {
     }
 		this.sendFriendRequest = function(requestInfo, callback){
       $http.post('/sendFriendRequest', requestInfo).then(function(returned_data){
-        console.log('2')
         if(typeof(callback)=='function'){
           user = returned_data.data;
           callback(user);
         }
       });
     }
-    this.create = function(user, callback){
-  		$http.post('/user', user).then(function(returned_data){
-    		if(typeof(callback)=='function'){
-        	user = returned_data.data;
-        	callback(user);
-    		}
-  		});
-    }
-    this.login = function(data, callback){
-      $http.post('/userLogin', data).then(function(returned_data){
-          console.log(returned_data.data);
-          if(typeof(callback) == 'function'){
-            callback(returned_data.data);
-          }
+    this.showFriends = function(id, callback){
+      $http.get('/showFriends/'+id).then(function(returned_data){
+        if(typeof(callback)=='function'){
+          user = returned_data.data;
+          callback(user);
+        }
       });
-    };
-
+    }
+    this.search = function(search, callback){
+      console.log(search)
+      $http.post('/friendSearch', search).then(function(returned_data){
+        if(typeof(callback)=='function'){
+          user = returned_data.data;
+          callback(user);
+        }
+      });
+    }
 	}
 	
   return new friendsFactory();

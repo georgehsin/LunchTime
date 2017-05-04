@@ -1,4 +1,4 @@
-myApp.controller('homeController', function($scope, $location, usersFactory, $cookies) {
+myApp.controller('homeController', function($scope, $location, usersFactory, friendsFactory, $cookies) {
 
 	$scope.user = $cookies.get('user');
 	$scope.userId = $cookies.get('userId');
@@ -16,10 +16,13 @@ myApp.controller('homeController', function($scope, $location, usersFactory, $co
 			}
 			for(var x=0;x<Object.keys(data.rec_pending).length;x++){
 				$scope.recievedRequest[data.rec_pending[x]._id] = true;
-			}						
+			}
+			return data						
 		});
 	}
-	index();
+	if ($scope.user){
+		index();
+	}
 
 	$scope.search = function(){
 		usersFactory.index($scope.result, function(data){
@@ -29,15 +32,12 @@ myApp.controller('homeController', function($scope, $location, usersFactory, $co
 	}
 
 	$scope.sendFriendRequest = function(send_id, recieve_id){
-		requestInfo = {
+		var requestInfo = {
 			'send_id': send_id,
 			'recieve_id': recieve_id
 		}
-		usersFactory.sendFriendRequest(requestInfo, function(data){
-			if (data == true){
-				$scope.success = true;
-			}
+		friendsFactory.sendFriendRequest(requestInfo, function(data){
+			index();
 		});
-		index();
 	}
 });

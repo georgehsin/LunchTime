@@ -19,7 +19,8 @@
     "angular-route": "^1.6.0",
     "materialize": "^0.98.2",
     "angular-materialize": "^0.2.2",
-    "angular-cookies": "^1.6.4"
+    "angular-cookies": "^1.6.4",
+    "ngmap": "^1.18.4"
   },
   "resolutions": {
     "materialize": "~0.97.8",

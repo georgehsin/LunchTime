@@ -1,14 +1,10 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ui.materialize', 'ngCookies']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.materialize', 'ngCookies', 'ngMap']);
 
 myApp.config(function ($routeProvider) {
     $routeProvider
     .when('/',{
         templateUrl: 'partials/home.html',
         controller: 'homeController'
-    })
-    .when('/event',{
-        templateUrl: 'partials/event.html',
-        controller: 'eventController'
     })
     .when('/login',{
         templateUrl: 'partials/login.html',
@@ -21,6 +17,14 @@ myApp.config(function ($routeProvider) {
     .when('/profile/:id',{
         templateUrl: 'partials/profile.html',
         controller: 'profileController'
+    })
+    .when('/newEvent',{
+        templateUrl: 'partials/newEvent.html',
+        controller: 'newEventsController'
+    })
+    .when('/events/:id',{
+        templateUrl: 'partials/events.html',
+        controller: 'eventsController'
     })
     .otherwise({
       redirectTo: '/'

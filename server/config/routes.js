@@ -1,10 +1,19 @@
+var login = require('../controllers/login.js');
 var user = require('../controllers/user.js');
+var friend = require('../controllers/friends.js');
+var events = require('../controllers/events.js');
 
 module.exports = function(app){
-  app.post('/user', user.create);
-  app.post('/userLogin', user.login);
+  app.post('/register', login.create);
+  app.post('/login', login.login);
+
   app.post('/userSearch', user.searchUser);
-  app.post('/sendFriendRequest', user.friendRequest);
   app.get('/user/:id', user.profile);
-  app.put('/user', user.add);
+  
+  app.put('/user', friend.add);
+  app.post('/sendFriendRequest', friend.friendRequest);
+  app.get('/showFriends/:id', friend.showFriends);
+  app.post('/friendSearch', friend.searchFriend);
+
+  app.post('/search', events.search)
 }

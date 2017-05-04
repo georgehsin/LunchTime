@@ -4,15 +4,6 @@ myApp.factory('usersFactory', ['$http', function($http) {
     this.profile = function(id, callback){
       $http.get('/user/'+id).then(function(returned_data){
         if(typeof(callback)=='function'){
-          console.log(returned_data.data)
-          user = returned_data.data;
-          callback(user);
-        }
-      });
-    }
-    this.add = function(addInfo, callback){
-      $http.put('/user', addInfo).then(function(returned_data){
-        if(typeof(callback)=='function'){
           user = returned_data.data;
           callback(user);
         }
@@ -26,16 +17,8 @@ myApp.factory('usersFactory', ['$http', function($http) {
         }
       });
     }
-		this.sendFriendRequest = function(requestInfo, callback){
-      $http.post('/sendFriendRequest', requestInfo).then(function(returned_data){
-        if(typeof(callback)=='function'){
-          user = returned_data.data;
-          callback(user);
-        }
-      });
-    }
     this.create = function(user, callback){
-  		$http.post('/user', user).then(function(returned_data){
+  		$http.post('/register', user).then(function(returned_data){
     		if(typeof(callback)=='function'){
         	user = returned_data.data;
         	callback(user);
@@ -43,7 +26,7 @@ myApp.factory('usersFactory', ['$http', function($http) {
   		});
     }
     this.login = function(data, callback){
-      $http.post('/userLogin', data).then(function(returned_data){
+      $http.post('/login', data).then(function(returned_data){
           if(typeof(callback) == 'function'){
             callback(returned_data.data);
           }
