@@ -1,39 +1,28 @@
 myApp.factory('usersFactory', ['$http', function($http) {
-	
+  
   function usersFactory(){
-    this.profile = function(id, callback){
-      $http.get('/user/'+id).then(function(returned_data){
-        if(typeof(callback)=='function'){
-          user = returned_data.data;
-          callback(user);
-        }
+    this.profile = function(id){
+      return $http.get('/user/'+id).then((data)=>{
+        return data.data
       });
     }
-    this.index = function(search, callback){
-      $http.post('/userSearch', search).then(function(returned_data){
-        if(typeof(callback)=='function'){
-          user = returned_data.data;
-          callback(user);
-        }
+    this.index = function(search){
+      return $http.post('/userSearch', search).then((data)=>{  //Our promise is parsing our data
+        return data.data
       });
     }
-    this.create = function(user, callback){
-  		$http.post('/register', user).then(function(returned_data){
-    		if(typeof(callback)=='function'){
-        	user = returned_data.data;
-        	callback(user);
-    		}
-  		});
+    this.create = function(user){
+      return $http.post('/register', user).then((data)=>{
+        return data.data
+      });
     }
-    this.login = function(data, callback){
-      $http.post('/login', data).then(function(returned_data){
-          if(typeof(callback) == 'function'){
-            callback(returned_data.data);
-          }
+    this.login = function(data){
+      return $http.post('/login', data).then((data)=>{
+        return data.data
       });
     };
 
-	}
-	
+  }
+  
   return new usersFactory();
 }]);

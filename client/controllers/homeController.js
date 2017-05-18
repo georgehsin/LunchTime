@@ -3,18 +3,18 @@ myApp.controller('homeController', function($scope, $location, usersFactory, fri
 	$scope.user = $cookies.get('user');
 	$scope.userId = $cookies.get('userId');
 
-	var index = function(){
-		usersFactory.profile($scope.userId, function(data){
+	const index = function(){
+		usersFactory.profile($scope.userId).then((data)=>{
 			$scope.friends = {}
 			$scope.sentRequest = {}
 			$scope.recievedRequest = {}
-			for(var x=0;x<Object.keys(data.friends).length;x++){
+			for(let x=0;x<Object.keys(data.friends).length;x++){
 				$scope.friends[data.friends[x]._id] = true;
 			}
-			for(var x=0;x<Object.keys(data.sent_pending).length;x++){
+			for(let x=0;x<Object.keys(data.sent_pending).length;x++){
 				$scope.sentRequest[data.sent_pending[x]._id] = true;
 			}
-			for(var x=0;x<Object.keys(data.rec_pending).length;x++){
+			for(let x=0;x<Object.keys(data.rec_pending).length;x++){
 				$scope.recievedRequest[data.rec_pending[x]._id] = true;
 			}
 			return data						
@@ -25,18 +25,18 @@ myApp.controller('homeController', function($scope, $location, usersFactory, fri
 	}
 
 	$scope.search = function(){
-		usersFactory.index($scope.result, function(data){
+		usersFactory.index($scope.result).then((data)=>{
 			$scope.result = {};
 			$scope.searchResults = data;
 		});
 	}
 
 	$scope.sendFriendRequest = function(send_id, recieve_id){
-		var requestInfo = {
+		const requestInfo = {
 			'send_id': send_id,
 			'recieve_id': recieve_id
 		}
-		friendsFactory.sendFriendRequest(requestInfo, function(data){
+		friendsFactory.sendFriendRequest(requestInfo).then((data)=>{
 			index();
 		});
 	}

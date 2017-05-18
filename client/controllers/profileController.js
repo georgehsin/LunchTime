@@ -1,18 +1,18 @@
 myApp.controller('profileController', function($route, $scope, usersFactory, friendsFactory, $location, $cookies, $routeParams) {
 
-	var index = function(){
-		usersFactory.profile($routeParams.id, function(data){
+	const index = function(){
+		usersFactory.profile($routeParams.id).then((data)=>{
 			$scope.self = data;
 		});
 	}
 	index();
 
 	$scope.add = function(send_id, recieve_id){
-		var addInfo = {
+		const addInfo = {
 			'send_id': send_id,
 			'recieve_id': recieve_id
 		}
-		friendsFactory.add(addInfo, function(data){
+		friendsFactory.add(addInfo).then((data)=>{
 			index();
 		});
 	}

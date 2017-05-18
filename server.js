@@ -1,4 +1,4 @@
-var express  = require( 'express' ),
+const express  = require( 'express' ),
     bp       = require('body-parser'),
     path     = require( 'path' ),
     root     = __dirname,

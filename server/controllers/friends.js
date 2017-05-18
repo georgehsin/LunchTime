@@ -1,61 +1,50 @@
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 function friendsController(){
   this.add = function(req,res){
-    User.findById({_id: req.body.recieve_id}, function(err, reciever){
-      if(err){
-        console.log(err);
-      }
-      else{
-        User.findById({_id: req.body.send_id}, function(err, sender){
-          if(err){
-            console.log(err);
-          }
-          else{
-            reciever.rec_pending.remove(req.body.send_id)
-            reciever.friends.push(sender)
-            sender.sent_pending.remove(req.body.recieve_id)
-            sender.friends.push(reciever)
-            reciever.save()
-            sender.save()
-            res.json(reciever);
-          }
-        });
-      }
+    Promise.all([
+      User.findById(req.body.recieve_id), 
+      User.findById(req.body.send_id)
+    ]).then((users)=>{
+      const reciever = users[0]
+      const sender = users[1]
+      reciever.rec_pending.remove(req.body.send_id)
+      reciever.friends.push(sender)
+      sender.sent_pending.remove(req.body.recieve_id)
+      sender.friends.push(reciever)
+      reciever.save()
+      sender.save()
+      res.json(reciever);
+    }).catch((error)=>{
+      console.log(error)
     });
   }
   this.friendRequest = function(req,res){
-    User.findById({_id: req.body.recieve_id}, function(err, reciever){
-      if(err){
-        console.log(err);
-      }
-      else{
-        User.findById({_id: req.body.send_id}, function(err, sender){
-          if(err){
-            console.log(err);
-          }
-          else{
-            reciever.rec_pending.push(sender)
-            sender.sent_pending.push(reciever)
-            reciever.save()
-            sender.save()
-            res.json(reciever);
-          }
-        });
-
-      }
+    Promise.all([
+      User.findById(req.body.recieve_id),
+      User.findById(req.body.send_id)
+    ]).then((users)=>{
+      const reciever = users[0]
+      const sender = users[1]
+      reciever.rec_pending.push(sender)
+      sender.sent_pending.push(reciever)
+      reciever.save();
+      sender.save();
+      res.json(reciever);
+    }).catch((error)=>{
+      console.log(error)
     });
-  }
+  };
   this.showFriends = function(req,res){
-    User.findById({_id: req.params.id})
+    User.findById(req.params.id)
       .populate('friends')
       .exec(function(err, results){
         res.json(results.friends)
       });
   }
   this.searchFriend = function(req,res){
-    User.findById({_id: req.body.userID})
+    User.findById(req.body.userID)
       .populate('friends')
       .exec(function(err, results){
         res.json(results.friends)

@@ -1,7 +1,7 @@
 myApp.controller('loginController', function($route, $scope, usersFactory, $location, $cookies) {
 
   $scope.loginForm = function(){
-  	usersFactory.login($scope.login, function(data){
+    usersFactory.login($scope.login).then((data)=>{
       if(data.invalid){
         $scope.invalid = true;
       }
@@ -11,7 +11,7 @@ myApp.controller('loginController', function($route, $scope, usersFactory, $loca
         $scope.invalid = false;
         window.location.href = '/';
       }
-  	});
+    });
   }
 
 });

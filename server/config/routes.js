@@ -1,7 +1,7 @@
-var login = require('../controllers/login.js');
-var user = require('../controllers/user.js');
-var friend = require('../controllers/friends.js');
-var events = require('../controllers/events.js');
+const login = require('../controllers/login.js');
+const user = require('../controllers/user.js');
+const friend = require('../controllers/friends.js');
+const events = require('../controllers/events.js');
 
 module.exports = function(app){
   app.post('/register', login.create);

@@ -2,8 +2,8 @@ myApp.controller('newEventsController', function($scope, $location, friendsFacto
 
 	$scope.inviteList = []
 
-	var friends = function(){
-		friendsFactory.showFriends($cookies.get('userId'), function(data){
+	const friends = function(){
+		friendsFactory.showFriends($cookies.get('userId')).then((data)=> {
 			$scope.result = {};
 			$scope.friends = data;
 		});
@@ -11,11 +11,11 @@ myApp.controller('newEventsController', function($scope, $location, friendsFacto
 	friends();
 
 	$scope.search = function(){
-		var context = {
+		const context = {
 			'search': $scope.result.name,
 			'userID': $cookies.get('userId')
 		}
-		friendsFactory.search(context, function(data){
+		friendsFactory.search(context).then((data)=> {
 			$scope.result = {};
 			$scope.searchFriends = data;
 		});
@@ -23,10 +23,9 @@ myApp.controller('newEventsController', function($scope, $location, friendsFacto
 
 	$scope.invite = function(friend){
 		$scope.inviteList.push(friend)
-		for(var x=0;x<$scope.friends.length;x++){
+		for(let x=0;x<$scope.friends.length;x++){
 			if($scope.friends[x]._id == friend._id){
-				console.log($scope.friends[x])
-				var hello = $scope.friends.splice(x,1);
+				const hello = $scope.friends.splice(x,1);
 				break
 			}
 		}
@@ -37,36 +36,36 @@ myApp.controller('newEventsController', function($scope, $location, friendsFacto
 			'details': $scope.event,
 			'people': $scope.inviteList
 		}
-		friendsFactory.addEvent(eventData, function(data){
+		friendsFactory.addEvent(eventData).then((data)=> {
 			
 		})
 	}
 
 // YELP/GOOGLE MAPS API
 	$scope.searchYelp = function(){
-		eventsFactory.yelpSearch($scope.searchRequest, function(data){
+		eventsFactory.yelpSearch($scope.searchRequest).then((data)=>{
 			$scope.results = data.businesses;
 			$scope.latitude = data.region.center.latitude;
 			$scope.longitude = data.region.center.longitude;
 			$scope.locations = [];
 			$scope.locationData = [];
 			// console.log(data.businesses[0].coordinates.latitude)
-			for(var x=0; x<data.businesses.length; x++){
+			for(let x=0; x<data.businesses.length; x++){
 				$scope.locations.push({
 					pos:[data.businesses[x].coordinates.latitude, data.businesses[x].coordinates.longitude],
 					name:data.businesses[x].name,
 					rating:data.businesses[x].rating
 				});;
-				console.log(data.businesses[x].name);
-				console.log(data.businesses[x].rating);
+				// console.log(data.businesses[x].name);
+				// console.log(data.businesses[x].rating);
 				$scope.locationData.push({name:data.businesses[x].name,rating:data.businesses[x].rating})
 			}
-			console.log($scope.locations);
-			console.log($scope.locationData);
+			// console.log($scope.locations);
+			// console.log($scope.locationData);
 		});
 	}
 
-	NgMap.getMap().then(function(map) {
+	NgMap.getMap().then((map) => {
 		$scope.map = map;
 
   });

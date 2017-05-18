@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 mongoose.createConnection('mongodb://localhost/LunchTimeDatabase');
 mongoose.connect('mongodb://localhost/LunchTimeDatabase');
 
-var	fs = require('fs');
+const	fs = require('fs');
 		path = require('path');
 		models_path = path.join(__dirname, './../models');
 reg = new RegExp( ".js$", "i" ),
