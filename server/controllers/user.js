@@ -12,12 +12,14 @@ function UsersController(){
       });
   }
   this.searchUser = function(req,res){
+    console.log('searching for users')
     User.find(
       {$or:[
         {'name':{'$regex':req.body.name, '$options':'i'}}, 
         {'email':{'$regex':req.body.name, '$options':'i'}}
       ]}
     ).then((results)=>{
+      console.log(results)
       res.json(results);
     });
   };

@@ -15,7 +15,6 @@ function loginController(){
         res.json(result);
       }
     }).catch(()=>{
-      console.log('hello')
       res.send({'invalid':true})
     });
   }

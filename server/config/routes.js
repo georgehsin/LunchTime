@@ -4,6 +4,7 @@ const friend = require('../controllers/friends.js');
 const events = require('../controllers/events.js');
 
 module.exports = function(app){
+	console.log('in routes')
   app.post('/register', login.create);
   app.post('/login', login.login);
 
