@@ -28,14 +28,17 @@ export default class Login extends React.Component {
     });
     RegisterActions.register(this.state)
     event.preventDefault();
+  	
+   //  if (this.state.success) {
+  	// 	console.log(hello)
+   //    return(
+  	// 		<Redirect to='/'/>
+  	// 	)
+  	// }
   }
 
+
   render() {
-  	if (this.state.success) {
-			return(
-				<Redirect to='/'/>
-			)
-		}
     return (
 		  <div>
       	<h1>Register</h1>

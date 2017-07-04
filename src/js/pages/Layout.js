@@ -1,8 +1,69 @@
 import React from "react";
 import {Link} from 'react-router';
 
+import LayoutStore from '../stores/LayoutStore';
+import Cookies from 'cookies-js'
 
 export default class Layout extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loggedIn = this.loggedIn.bind(this)
+    this.getLoginStatus = this.getLoginStatus.bind(this)
+    this.logout = this.logout.bind(this)
+    this.state = {
+      login: false
+    }
+  }
+
+  componentWillMount() {
+    LayoutStore.on('change', this.getLoginStatus)
+  }
+ 
+  componentWillUnmount() {
+    LayoutStore.removeListener('change', this.getLoginStatus)
+  }
+
+  getLoginStatus() {
+    const user = Cookies.get('name')
+    this.setState({
+      login: user,
+    });
+  }
+
+  logout() {
+    this.setState({
+      login: false,
+    });
+    Cookies.expire('userID')
+    Cookies.expire('name')
+    Cookies.expire('email')
+  }
+
+  loggedIn() {
+    const user = Cookies.get('name')
+    if (user) {
+      return (
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul className="nav navbar-nav navbar-right">
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='profile'>Profile</Link></li>
+            <li><Link to='/' onClick={this.logout} >Logout</Link></li> 
+          </ul>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul className="nav navbar-nav navbar-right">
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='login'>Login</Link></li>
+            <li><Link to='register'>Register</Link></li>
+          </ul>
+        </div>
+      )
+    }
+  }
 
   render() {
     return (
@@ -18,14 +79,7 @@ export default class Layout extends React.Component {
               </button>
               <Link to='/' className="navbar-brand">LunchTime!</Link>
             </div>
-
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='login'>Login</Link></li>
-                <li><Link to='register'>Register</Link></li>
-              </ul>
-            </div>
+            {this.loggedIn()}
           </div>
         </nav>
         {this.props.children}

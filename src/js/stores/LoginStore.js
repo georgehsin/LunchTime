@@ -5,12 +5,30 @@ import dispatcher from '../dispatcher'
 class LoginStore extends EventEmitter {
 	constructor() {
 		super();
+		this.invalid = false
+		this.success = false
+		this.userInfo = {}
+	}
+
+	loginValid() {
+		return ({
+			invalid: this.invalid,
+			success: this.success,
+			userInfo: this.userInfo,
+		})
 	}
 
 	handleActions(action) {								
 		switch(action.type) {								
-			case 'LOGIN': {
-				console.log('login')						
+			case 'INVALID_LOGIN': {			
+				this.invalid = true
+				this.emit("change");
+				break
+			}
+			case 'LOGIN': {								
+				this.invalid = false
+				this.success = true
+				this.userInfo = action.status
 				this.emit("change");
 				break
 			}
