@@ -23,6 +23,13 @@ function UsersController(){
       res.json(results);
     });
   };
+  this.delete = function(req,res){
+    User.remove({_id: req.params.id}, (err) => {
+      if (!err) {
+        console.log('successfully removed')
+      }
+    })
+  }
 }
 
 module.exports = new UsersController();

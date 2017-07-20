@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router'
 
 import RegisterStore from '../stores/RegisterStore';
 import * as RegisterActions from '../actions/RegisterActions';
+import history from '../utils/history'
 
 export default class Login extends React.Component {
   constructor() {
@@ -28,13 +29,7 @@ export default class Login extends React.Component {
     });
     RegisterActions.register(this.state)
     event.preventDefault();
-  	
-   //  if (this.state.success) {
-  	// 	console.log(hello)
-   //    return(
-  	// 		<Redirect to='/'/>
-  	// 	)
-  	// }
+  	this.props.history.push('/')
   }
 
 

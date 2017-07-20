@@ -9,16 +9,17 @@ class HomeStore extends EventEmitter {
 	}
 
 	getUserSearchResults() {
-		// console.log('Home Store')
 		return this.userSearchResults;
 	}
 
 	handleActions(action) {								
 		switch(action.type) {								
-			case 'GET_USERS': {
-				// console.log('GET_USERS')
-				// console.log(action)	
+			case 'GET_USERS': {	
 				this.userSearchResults = action.userSearchResults			
+				this.emit('change');
+				break
+			}
+			case 'SEND_FRIEND_REQUEST': {	
 				this.emit('change');
 				break
 			}

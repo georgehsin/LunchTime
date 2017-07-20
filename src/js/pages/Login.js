@@ -46,11 +46,11 @@ export default class Login extends React.Component {
       userInfo: loginValid.userInfo,
     });
     if (!loginValid.invalid) {
-      this.props.history.push('/')
       const { _id, name, email } = this.state.userInfo
       Cookies.set('userID', _id);
       Cookies.set('name', name);
       Cookies.set('email', email);
+      this.props.history.push('/')
     }
   }
 

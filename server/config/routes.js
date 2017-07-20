@@ -10,6 +10,7 @@ module.exports = function(app){
 
   app.post('/userSearch', user.searchUser);
   app.get('/user/:id', user.profile);
+  // app.post('/user/:id', user.delete);
   
   app.put('/user', friend.add);
   app.post('/sendFriendRequest', friend.friendRequest);
