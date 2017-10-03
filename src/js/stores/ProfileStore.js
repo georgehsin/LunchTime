@@ -14,13 +14,22 @@ class ProfileStore extends EventEmitter {
 
 	handleActions(action) {								
 		switch(action.type) {								
-			case 'GET_PROFILE': {			
+			case 'GET_PROFILE': {
+				let profile = action.profile			
+				if (!profile.hasOwnProperty('friends')) {
+					profile['friends'] = [] 
+				}
+				if (!profile.hasOwnProperty('rec_pending')) {
+					profile['rec_pending'] = []
+				}
+				if (!profile.hasOwnProperty('sent_pending')) {
+					profile['sent_pending'] = []
+				}
 				this.profile = action.profile
 				console.log(this.profile)
 				this.emit("change");
 				break
 			}
-
 		}
 	}
 }

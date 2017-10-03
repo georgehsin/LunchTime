@@ -5,9 +5,9 @@ import dispatcher from '../dispatcher'
 class LoginStore extends EventEmitter {
 	constructor() {
 		super();
-		this.invalid = false
-		this.success = false
-		this.userInfo = {}
+		this.invalid = false;
+		this.success = false;
+		this.userInfo = {};
 	}
 
 	loginValid() {
@@ -15,7 +15,7 @@ class LoginStore extends EventEmitter {
 			invalid: this.invalid,
 			success: this.success,
 			userInfo: this.userInfo,
-		})
+		});
 	}
 
 	handleActions(action) {								
@@ -25,7 +25,8 @@ class LoginStore extends EventEmitter {
 				this.emit("change");
 				break
 			}
-			case 'LOGIN': {			
+			case 'LOGIN': {		
+				console.log('loggin in')	
 				this.invalid = false
 				this.success = true
 				this.userInfo = action.status

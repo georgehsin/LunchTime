@@ -35,7 +35,7 @@ export default class Layout extends React.Component {
       login: false,
     });
     const cookies = new Cookies();
-    cookies.remove('userID')
+    cookies.remove('uid')
     cookies.remove('name')
     cookies.remove('email')
   }

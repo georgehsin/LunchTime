@@ -6,7 +6,11 @@ export function getProfile(uid) {
 	firebase.database().ref('/users/' + uid).once('value').then(function(snapshot) {
 		console.log(snapshot.val())
 		var username = (snapshot.val() && snapshot.val().username);
-	  });
+		dispatcher.dispatch({              
+			type:'GET_PROFILE',
+			profile: snapshot.val()
+        });
+	});
 }
 
 // import dispatcher from '../dispatcher'

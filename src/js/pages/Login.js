@@ -51,7 +51,6 @@ export default class Login extends React.Component {
       cookies.set('uid', uid);
       cookies.set('name', name);
       cookies.set('email', email);
-      console.log("Cookies Set")
       this.props.history.push('/')
     }
   }

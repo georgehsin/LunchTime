@@ -43,7 +43,6 @@ export default class Profile extends React.Component {
 
   render() {
     const { name, email, friends, rec_pending, sent_pending } = this.state.profile
-    console.log(friends)
     const Friends = friends.map((friend) => {
       return <User key={friend._id} {...friend}/>;
     });

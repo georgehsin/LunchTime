@@ -5,12 +5,19 @@ import dispatcher from '../dispatcher'
 class RegisterStore extends EventEmitter {
 	constructor() {
 		super();
+		this.userInfo = {};
+	}
+
+	getUserInfo() {
+		return ({
+			userInfo: this.userInfo
+		})
 	}
 
 	handleActions(action) {								
 		switch(action.type) {								
 			case 'REGISTER': {
-				console.log('registering')						
+				this.userInfo = action.status;			
 				this.emit("change");
 				break
 			}

@@ -1,18 +1,27 @@
 import React from "react";
-import { Route, Redirect } from 'react-router'
 
 import RegisterStore from '../stores/RegisterStore';
 import * as RegisterActions from '../actions/RegisterActions';
 import history from '../utils/history'
+import Cookies from 'universal-cookie';
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
   constructor() {
   	super()
   	this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.storeUserData = this.storeUserData.bind(this);
     this.state = {
-    	success: false,
+			userInfo: {}
     }
+	}
+ 
+  componentWillMount() {
+    RegisterStore.on('change', this.storeUserData)
+  }
+
+  componentWillUnmount() {
+    RegisterStore.removeListener('change', this.storeUserData)
   }
 
   handleChange(event) {
@@ -23,15 +32,23 @@ export default class Login extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("User's name is " + this.state.username);
-    this.setState({
-    	success: true
-    });
+    // alert("User's name is " + this.state.username);
     RegisterActions.register(this.state)
-    event.preventDefault();
-  	this.props.history.push('/')
-  }
-
+		event.preventDefault();
+	}
+	
+	storeUserData() {
+		const userInfo = RegisterStore.getUserInfo()
+		this.setState({
+      userInfo: userInfo.userInfo
+    });
+		const { uid, name, email } = this.state.userInfo
+		const cookies = new Cookies();
+		cookies.set('uid', uid);
+		cookies.set('name', name);
+		cookies.set('email', email);
+		this.props.history.push('/')
+	}
 
   render() {
     return (
