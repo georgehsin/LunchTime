@@ -3,7 +3,7 @@ import React from "react";
 import LoginStore from '../stores/LoginStore';
 import * as LoginActions from '../actions/LoginActions';
 import history from '../utils/history'
-import Cookies from 'cookies-js'
+import Cookies from 'universal-cookie';
 
 export default class Login extends React.Component {
   constructor() {
@@ -46,10 +46,12 @@ export default class Login extends React.Component {
       userInfo: loginValid.userInfo,
     });
     if (!loginValid.invalid) {
-      const { _id, name, email } = this.state.userInfo
-      Cookies.set('userID', _id);
-      Cookies.set('name', name);
-      Cookies.set('email', email);
+      const { uid, name, email } = this.state.userInfo
+      const cookies = new Cookies();
+      cookies.set('uid', uid);
+      cookies.set('name', name);
+      cookies.set('email', email);
+      console.log("Cookies Set")
       this.props.history.push('/')
     }
   }

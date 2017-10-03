@@ -25,7 +25,7 @@ class LoginStore extends EventEmitter {
 				this.emit("change");
 				break
 			}
-			case 'LOGIN': {								
+			case 'LOGIN': {			
 				this.invalid = false
 				this.success = true
 				this.userInfo = action.status

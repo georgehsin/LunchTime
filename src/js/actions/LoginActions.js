@@ -1,25 +1,23 @@
 import dispatcher from '../dispatcher'
-import axios from 'axios'
+var database = firebase.database();
 
 export function login(input) {
-	console.log('2')
-	axios.post('/login', {
-		email: input.email,
-		password: input.password,
-	}).then((data) => { 
-			if (data.data.invalid){
-				dispatcher.dispatch({
-					type:'INVALID_LOGIN',
-				});
-			} 
-			else {
-				dispatcher.dispatch({
-					type:'LOGIN',
-					status: data.data
-				});
-				dispatcher.dispatch({              
-					type:'LOGGED_IN',
-				});
-			}
+    console.log('working')
+	firebase.auth().signInWithEmailAndPassword(input.email, input.password).then((data) => {
+        dispatcher.dispatch({
+			type:'LOGIN',
+			status: data
+		});
+		dispatcher.dispatch({              
+			type:'LOGGED_IN',
+		});
+	}).catch(function(error) {
+        var errorCode = error.code;
+		var errorMessage = error.message;
+		console.log(errorCode, errorMessage)
+		if (errorCode == "auth/invalid-email" || errorCode == "auth/wrong-password") {
+			alert(errorMessage)
+			console.log(errorMessage)
+		}
 	});
 }

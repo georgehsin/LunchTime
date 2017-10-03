@@ -1,5 +1,5 @@
 import React from "react";
-import Cookies from 'cookies-js'
+import Cookies from 'universal-cookie';
 
 import * as HomeActions from '../../actions/HomeActions'
 
@@ -8,8 +8,9 @@ export default class User extends React.Component {
     super(props);
     this.friendStatus = this.friendStatus.bind(this)
     this.addFriend = this.addFriend.bind(this)
-    this.acceptFriend = this.acceptFriend.bind(this)
-    this.userID = Cookies.get('userID')
+		this.acceptFriend = this.acceptFriend.bind(this)
+		const cookies = new Cookies();
+    this.userID = cookies.get('uid')
     // this.handleDelete = this.handleDelete.bind(this)
   }
 

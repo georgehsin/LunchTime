@@ -8,6 +8,23 @@
 <body>
 	<div id="app"></div>
 
+
+	<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
+	<script>
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyBhogzCTz_y6zj-Ik7Hx8eWhnr_5W6hwY0",
+		authDomain: "lunchtime-27d5e.firebaseapp.com",
+		databaseURL: "https://lunchtime-27d5e.firebaseio.com",
+		projectId: "lunchtime-27d5e",
+		storageBucket: "lunchtime-27d5e.appspot.com",
+		messagingSenderId: "209263024623"
+	};
+	firebase.initializeApp(config);
+	</script>
 	<script type="text/javascript" src='./js/vendors/jquery-3.2.1.min.js'></script>
 	<script type="text/javascript" src='client.min.js'></script>
 </body>

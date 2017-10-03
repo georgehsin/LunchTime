@@ -1,5 +1,4 @@
 import dispatcher from '../dispatcher'
-import axios from 'axios'
 
 export function AppAction(id) {
 	dispatcher.dispatch({              

@@ -1,20 +1,24 @@
 import dispatcher from '../dispatcher'
-import axios from 'axios'
+var database = firebase.database();
 
 export function register(input) {
 	console.log(input)
-	console.log('working')
-	axios.post('/register', {
-		name: input.username, 
-		email: input.email,
-		password: input.password,
-		confirm: input.confirm
+    console.log('working')
+    firebase.auth().createUserWithEmailAndPassword(input.email, input.password).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
 	}).then((data) => {
-		console.log('data back')
-		console.log(data.data);
-			dispatcher.dispatch({              
-				type:'REGISTER',
-				posts: data.data
-			});
+        console.log('Saving to database')
+        firebase.database().ref('users/' + data.uid).set({
+			uid: data.uid,
+			name: input.username,
+            friends: {},
+            events: {}
+        });
+	}).then(() => {
+        console.log('dispatching')
+        dispatcher.dispatch({              
+            type:'REGISTER',
+        });
 	});
 }

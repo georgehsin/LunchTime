@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 import User from '../components/user/User';
 import HomeStore from '../stores/HomeStore';
 import * as HomeActions from '../actions/HomeActions';
-import Cookies from 'cookies-js'
+import Cookies from 'universal-cookie';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -51,10 +51,11 @@ export default class Home extends React.Component {
   }
 
   UserComponents() {
+    const cookies = new Cookies();
     const { results, userSearchResults} = this.state
     if (results) {
       const UserComponents = userSearchResults.map((user) => {
-        if (Cookies.get('userID') == user._id){
+        if (cookies.get('userID') == user._id){
           return null
         }
         else {

@@ -1,8 +1,7 @@
 import React from "react";
 import {Link} from 'react-router';
-
+import Cookies from 'universal-cookie';
 import LayoutStore from '../stores/LayoutStore';
-import Cookies from 'cookies-js'
 
 export default class Layout extends React.Component {
   constructor(props) {
@@ -24,9 +23,10 @@ export default class Layout extends React.Component {
   }
 
   getLoginStatus() {
-    const user = Cookies.get('name')
+    const cookies = new Cookies();
+    const user = cookies.get('uid')
     this.setState({
-      login: user,
+      login: true,
     });
   }
 
@@ -34,13 +34,16 @@ export default class Layout extends React.Component {
     this.setState({
       login: false,
     });
-    Cookies.expire('userID')
-    Cookies.expire('name')
-    Cookies.expire('email')
+    const cookies = new Cookies();
+    cookies.remove('userID')
+    cookies.remove('name')
+    cookies.remove('email')
   }
 
   loggedIn() {
-    const user = Cookies.get('name')
+    const cookies = new Cookies();
+    const user = cookies.get("uid")
+    console.log(user)
     if (user) {
       return (
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

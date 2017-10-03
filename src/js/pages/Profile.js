@@ -3,7 +3,8 @@ import React from "react";
 import ProfileStore from '../stores/ProfileStore';
 import * as ProfileActions from '../actions/ProfileActions';
 import User from '../components/user/User';
-import Cookies from 'cookies-js'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 export default class Profile extends React.Component {
   constructor() {
@@ -25,7 +26,8 @@ export default class Profile extends React.Component {
 
   componentDidMount() {
     console.log('2')
-    ProfileActions.getProfile(Cookies.get('userID'));
+    const cookies = new Cookies();
+    ProfileActions.getProfile(cookies.get('uid'));
   }
 
   componentWillUnmount() {
@@ -33,8 +35,9 @@ export default class Profile extends React.Component {
   }
 
   getProfile() {
+    const cookies = new Cookies();
     this.setState({ 
-      profile: ProfileStore.getProfile()
+      profile: ProfileStore.getProfile(cookies.get('uid'))
     })
   }
 
