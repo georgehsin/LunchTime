@@ -14,7 +14,7 @@ export function register(input) {
         console.log('Saving to database')
         firebase.database().ref('users/' + data.uid).set({
 			uid: data.uid,
-			name: input.username,
+			name: input.username.toLowerCase(),
         });
         dispatcher.dispatch({              
             type:'REGISTER',

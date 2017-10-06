@@ -13,7 +13,9 @@ export default class Login extends React.Component {
     this.loginValid = this.loginValid.bind(this);
     this.state = {
       invalid: false,
-      userInfo: {}
+      userInfo: {}, 
+      email: '',
+      password: ''
     }
   }
 
